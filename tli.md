@@ -27,7 +27,7 @@
 
 ## about ditails
 
-<img src="./src/images/reactBrowserWeb_Detail.png.jpg" alt="react browserroute img" style="height: 100px; width:100px;"/>
+<img src="./src/images/reactBrowserWeb_Detail.png.jpg" alt="react browserroute img" style="height: 400px; width:800px;"/>
 
 > `<BrowserRoute> `uses regular URL paths. 
 >> these are generally the best-looking URLs
@@ -124,3 +124,53 @@ ReactDOM.render(
   document.getElementById("root")
 );
 ```
+
+## plus important thing!
+* `<Route path>` matches the beginning of the URL, not the whole thing. 
+* So a `<Route path="/">` will always match the URL, 
+* Because of this, we typically put this `<Route>` last in our `<Switch>`.
+* Another possible solution is to use `<Route exact path="/">` which does match the entire URL.
+### -> 즉, `<Route path="/">` 요런식으로 라우터 path를 설정해두면, 뒤에붙은 URL의 특정 path값이 맞춰지지 않은이상 `<Route path="/" element="<설정할 엘리먼트 값 />`으로 이동된다.
+
+## Note!
+* Although React Router does support rendering `<Route>` elements outside of a `<Switch>` as of version 5.1
+* So -> RECOMMAND Thing is 
+* Use the `userRtoueMatch hook` instead, 
+* Additionally, do not recommand ;
+* render a `<Route>` without a path and instead suggest you use a hook to get access to whatever variable you need.
+---
+# What's different `git fetch` vs `git pull` ?
+## `git fetch`
+git fetch is the command that tells your local git to retrieve the latest meta-data info from the original (yet doesn’t do any file transferring. It’s more like just checking to see if there are any changes available).
+
+## `git pull`
+git pull on the other hand does that AND brings (copy) those changes from the remote repository.
+---
+
+
+## Navigation (or Route Changers)
+* React Router provide a `<Link>` component to create links in your application. Wherever you render a `<Link>`, an anchor `(<a>)` will be rendered in your HTML document.
+
+### The `<NavLink>`is a special type of `<Link>` that can style itself as "active" when its to prop matches the current location. 
+
+
+``` js
+
+<Link to="/">Home</Link>
+// <a href="/">Home</>
+ 
+<NavLink to="/react" activeClassName="hurray">
+React
+</NavLink>
+// when the URL is /react. this renders:
+// <a herf="/react" className="hurray">React</a>
+
+// when it's something else:
+// <a href="/react">React</a>
+
+<Redirect to="/login" />
+```
+
+* Any time that you want to force navigation, you can render a `<Redirect>`
+* when a `<Redirect>`renders, it will navigate useing its to prop.
+
