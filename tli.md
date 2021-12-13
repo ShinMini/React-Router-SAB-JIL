@@ -158,8 +158,9 @@ git pull on the other hand does that AND brings (copy) those changes from the re
 
 <Link to="/">Home</Link>
 // <a href="/">Home</>
- 
-<NavLink to="/react" activeClassName="hurray">
+
+ // <NavLink> can add motion effect(using acttive) it self
+<NavLink to="/react" activeClassName="hurray"> 
 React
 </NavLink>
 // when the URL is /react. this renders:
@@ -174,3 +175,30 @@ React
 * Any time that you want to force navigation, you can render a `<Redirect>`
 * when a `<Redirect>`renders, it will navigate useing its to prop.
 
+-----
+
+# Sever Rendering
+
+* Rendering on the server is a bit different since it's all stateless.
+* The basic idea is that we wrap the app in stateless `<StaticRotuer>` instead of a `<BrowserRouter>`.
+* We pass in the requested url from the server so the routes can match and a context prop we'll discuss next.
+
+### Example
+``` javascript
+// client
+<BrowserRouter>
+  <App/>
+</BrowserRouter>
+
+// server (not the complete story)
+<StaticRouter
+  location={req.url}
+  context={context}
+>
+  <App/>
+</StaticRouter>
+```
+
+* When you render a `<Redirect>` on the client, the browser history changes state and we get the new secreen. 
+* in a static server environment we can't change the app state.
+* 
