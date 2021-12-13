@@ -342,3 +342,44 @@ render() {
 ___
 
 <a href="https://v5.reactrouter.com/web/guides/server-rendering" alt="Reference">Reference</a>
+
+
+---
+# Code Splitting
+
+### One great feature of the web is that we don't have to make our visitors download the entire app they can use it!
+
+* That means you can splitting as incrementally downloading the app.
+* To accomplish this we’ll use webpack, @babel/plugin-syntax-dynamic-import, and loadable-components.
+* ---
+### Webpac has built-in support for dynamic imports
+  
+* however, if you are using Babel (e.g., to compile JSX to JavaScript) then you will need to use the @babel
+
+* plugin-syntax-dynamic-import plugin. 
+  
+* This is a syntax-only plugin, meaning Babel won’t do any additional transformations.
+  
+* The plugin simply allows Babel to parse dynamic imports so webpack can bundle them as a code split.
+
+### Example
+
+``` Javascript
+
+import loadable from "@loadable/component";
+import Loading from "./Loading.js";
+
+const LoadableComponent = loadable(() => import("./Dashboard.js"), {
+  fallback: <Loading />
+});
+
+export default class LoadableDashboard extends React.Component {
+  render() {
+    return <LoadableComponent />;
+  }
+}
+
+```
+*  Simply use LoadableDashboard (or whatever you named your component) and it will automatically be loaded and rendered when you use it in your application. 
+  
+*  The fallback is a placeholder component to show while the real component is loading.
