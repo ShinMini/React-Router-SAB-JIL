@@ -199,6 +199,146 @@ React
 </StaticRouter>
 ```
 
-* When you render a `<Redirect>` on the client, the browser history changes state and we get the new secreen. 
-* in a static server environment we can't change the app state.
-* 
+* When you render a `<Redirect>` on the client, the browser history changes state and we get the new screen. 
+* In a static server environment we can't change the app state.
+* Instead, we use the context prop to find out what the result of rendering was.
+* If we find a context, url, then we know the app redirected.
+* This allows us to send a proper redirect from the server.
+
+``` javascript
+const context = {};
+const markup = ReactDOMServer.renderToString(
+  <StaticRouter location={req.url} context={context}>
+    <App />
+  </StaticRouter>
+);
+
+if (context.url) {
+  // Somewhere a `<Redirect>` was rendered
+  redirect(301, context.url);
+} else {
+  // we're good, send the response
+}
+```
+
+## Adding app specific context information
+* The router only ever adds `context.url`. 
+* But you may want some redirects to be 301 and others 302.
+* Or maybe you'd like aren't authorized. 
+* The context prop is yours, So you can mutate it. 
+  
+### Example about a Way to distinguish between 301 and 302 redirects:
+
+``` javascript
+function RedirectWithStatus({ from, to, status }) {
+  return (
+    <Route
+      render={({ staticContext }) => {
+        // there is no `staticContext` on the client, so
+        // we need to guard against that here
+        if (staticContext) staticContext.status = status;
+        return <Redirect from={from} to={to} />;
+      }}
+    />
+  );
+}
+
+// somewhere in your app
+function App() {
+  return (
+    <Switch>
+      {/* some other routes */}
+      <RedirectWithStatus status={301} from="/users" to="/profiles" />
+      <RedirectWithStatus
+        status={302}
+        from="/courses"
+        to="/dashboard"
+      />
+    </Switch>
+  );
+}
+
+// on the server
+const context = {};
+
+const markup = ReactDOMServer.renderToString(
+  <StaticRouter context={context}>
+    <App />
+  </StaticRouter>
+);
+
+if (context.url) {
+  // can use the `context.status` that
+  // we added in RedirectWithStatus
+  redirect(context.status, context.url);
+}
+```
+
+---
+
+# What is the `render()` in ReactJS
+> React.js library has two components: 
+
+* Class components
+* Functional Components
+
+Class components uses render function. The ReactDOM.render() function takes two arguments, HTML code and an HTML element. 
+
+## Purpose of render()
+
+* React renders HTML to the web page by using a function called `render()`.
+* The purpose of the function is to display the specified HTML code inside the specified HTML element.
+* In the `render()` method, we can read props and state and return our JSX code to the root component of our app.
+* In the `render()` method, we cannot change the state, and we cannot cause side effects(such as making an HTTP request to the webserver).
+
+## so point is 
+* `render()` method는 pages 내 state와 props를 읽어올 수는 있지만, 변경할 수 는 없다!
+* 따라서, 'render()'의 역할은 페이지내에 주어진 state와 props값을 읽어와 page에 display될 variable 값을 생성하는데 쓰인다. 
+
+### shows example 
+``` javascript
+
+import React, { Component } from 'react';
+export default class App extends Component {
+state = {
+	PawriDays: [
+		{ id: '123s', Day: 'Monday' },
+		{ id: '234r', Day: 'Saturday' },
+		{ id: '12d5', Day: 'Sunday' }
+	]
+}
+
+render() {
+	const PartyDays = this.state.PawriDays.length
+	const style = {
+	'textAlign': 'center',
+	'color': 'green'
+	}
+
+	// Return JSX code
+	return (
+	<div style={style}>
+		<h1>I am User</h1>
+		<p> We party: {PartyDays} days a week </p>
+	</div>
+	);
+}
+}
+
+```
+
+<a href="https://www.geeksforgeeks.org/explain-the-purpose-of-render-in-reactjs/" alt="What's a render()?">Reference</a>
+---
+## git branch 
+### if you want to create a new branch from an existing branch following this steps :)
+---
+> Example 
+> > if I have branch "my-branch" 
+> > and I want to create new branch in "my-brnach"
+> 1. git checkout "my-branch"
+> 2. git checkout -d "new-branch"
+> > Second way 
+> 1. git checkout -d "new-branch" "my-branch"
+___
+
+<a href="https://v5.reactrouter.com/web/guides/server-rendering" alt="Reference">Reference</a>
