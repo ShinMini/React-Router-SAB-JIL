@@ -383,3 +383,9 @@ export default class LoadableDashboard extends React.Component {
 *  Simply use LoadableDashboard (or whatever you named your component) and it will automatically be loaded and rendered when you use it in your application. 
   
 *  The fallback is a placeholder component to show while the real component is loading.
+
+[21.12.14]
+# Scroll Restoration
+
+* In earlier versions of React Router we provided out-of-box support for scroll restoration and people have been asking for it ever since.
+* Hopefully this document helps you need out of the scroll bar and routing!
