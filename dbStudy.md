@@ -84,7 +84,7 @@
 
 ## DBMS의 저장구조 (DBMS stoage architecture)
 
-<img src="C:\Users\gusal\mini\routerbase\src\images\DBMS storage architectrue.png" alt="DBMS architecture" style="height:300px; width: 600px;"/>
+<img src="C:\Users\gusal\mini\routerbase\src\images\DBMS.png" alt="DBMS architecture" style="height:300px; width: 600px;"/>
 
 ## 데이터베이스 저장연산
 
@@ -130,3 +130,17 @@
 * T: Si -> Sj, Si, Sj (= S
 * S: 데이터베이스의 일관된 상태 집합
 
+## 트랜잭션의 특징(ACID)
+
+* 원자성(Atomicity)
+  *  더 이상 나누어 질 수 없는 작업 단위(All or Nothing)
+
+* 일관성(Consistency)
+    * 트랜잭션 실행 전과 후에도 항상 일관성을 유지해야 함.
+
+* 격리성(Isolation)
+  * 트랜잭션 실행 중 연산의 중간 결과를 다른 트랙잰션이 접근할 수 없음.
+
+* 영속석(Durability)
+  * 트랜잭션이 일단 성공적으로 샐행되면 그 결과는 영속적
+  
