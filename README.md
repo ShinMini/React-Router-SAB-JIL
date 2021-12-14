@@ -641,9 +641,69 @@ ReactDOM.render(
 2. `useLocation()`함수를 호출하면, 현재 URL주소값을 반환한다.
 3. 주로 page가 mount(처음 생성), unmount(사라질때), update(업데이트 될때), `useEffect()`함수와 같이 사용해, 특정작업을 처리할 때 유용하다. 
 
+> `React.useEffect()`란,
+> `componentDidMount`, `componentDidUpdate`와 유사하다.
 > Example
+
+``` javascript
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `you clicked ${count} times`;
+  });
+
+return (
+  <div>
+    <p>you clicked {count} times</p>
+    <button onClick={() => setCount(count + 1)}>
+      Click me!
+    </button>
+  </div>
+);
+}
+
+```
+
 ``` javascript
 import React, { useEffect} from 'react';
 
+function User({ user, onRemove, onToggle}) {
 
+  useEffect( function() {
+    console.log('컴포넌트가 화면에 나타남.');
+
+    return function() {
+      console.log('컴포넌트가 화면에 사라짐.');
+    };
+  }, []);
+  return(
+    <div>
+    <b style={{
+      cursor: 'pointer',
+      color: user.active ? 'green' : 'black'
+    }}
+    <button onClick={() => onRemove(user.id)}>삭제</button>
+    </div>
+  );
+}
+
+function UserList({ users, onRemove, onToggle  }) {
+  return (
+    <div>
+      {Users.map(user => (
+        <User
+          user={user}
+          key={user.id}
+          onRemove={onRemove}
+          onToggle={onToggle}
+        >
+      )}
+    </div>
+  )
+}
 ```
