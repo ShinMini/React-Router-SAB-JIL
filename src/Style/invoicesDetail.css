@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Merriweather:wght@300&family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
+* {
+   font-family: 'Roboto Slab', serif;
+}
+
+main {
+   padding: 1rem;
+}

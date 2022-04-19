@@ -1,12 +1,6 @@
 import * as React from 'react';
-
-import {
-   useLocation,
-   NavLink,
-   Outlet,
-   useSearchParams,
-} from 'react-router-dom';
-import { getInvoices } from '../data';
+import { useLocation, NavLink, Outlet, useSearchParams, } from 'react-router-dom';
+import { getInvoices } from '../Data/data';
 
 function QueryNavLink({ to, ...props }) {
    let location = useLocation();

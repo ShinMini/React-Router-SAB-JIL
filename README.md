@@ -4,6 +4,7 @@
 
 ["22.04.19 | router의 종류 왤케 많음?"](TLI/s2.md)
 
+["22.02.13 | react가 component를 그려내는 방식 "](TLI/s3.md)
 ---
 
 ["21.12.12 | DB structure"](buildPlan/dbStudy.md)

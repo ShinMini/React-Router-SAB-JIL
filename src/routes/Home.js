@@ -1,5 +1,5 @@
 import React from "react";
-import { Movie_dataes } from '../Movie/Movie_data.ts';
+import { Movie_dataes } from '../Data/Movie_data.ts';
 import Movie from '../components/Movie';
 import './Home.css';
 
@@ -20,8 +20,7 @@ export default class Home extends React.Component {
             <section className="container">
                 <div className="movies">
                     {
-                        movies.map(movie =>
-                        (
+                        movies.map(movie => (
                             <Movie
                                 key={movie.id}
                                 year={movie.year}
@@ -29,9 +28,7 @@ export default class Home extends React.Component {
                                 summary={movie.summary}
                                 poster={movie.poster}
                             />
-                        )
-                        )
-                    }
+                        ))}
                 </div>
             </section>
         );
