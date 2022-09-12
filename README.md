@@ -10,6 +10,4 @@
 
 ## ["21.12.12 | DB structure"](buildPlan/dbStudy.md)
 
-## ["21.12.12 | 가벼운 소개페이지 작성 양식"](buildPlan/introduceMe.md)
-
 ## ["21.12.12 | 웹 설계"](buildPlan/IntroduceWeb.md)
